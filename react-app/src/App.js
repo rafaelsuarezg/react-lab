@@ -1,5 +1,7 @@
 import React, {useState, useRef, useEffect} from "react";
 import TodoList from "./TodoList";
+import Header from "./Header";
+import Footer from "./Footer";
 import {v4 as uuidv4} from 'uuid';
 
 // Working with this tutorial: https://www.youtube.com/watch?v=hQAHSlTtcmY&t=85s&ab_channel=WebDevSimplified
@@ -32,33 +34,40 @@ function App() {
     // Set new todos
     setTodos(newTodos)
   }
-
-  function handleClearCompletedTodos(){
-    const newTodos = todos.filter(todo => !todo.completed)
-    setTodos(newTodos)
-  }
-
-  function handleAddTodo (e) {
+  
+  function handleAddTodo (e, todoNameRef) {
     // get the value of the input
     const name = todoNameRef.current.value
     // return if name is empty
     if (name === '') return
     console.log(name)
-    // Clear input
+    // Set Todos
     setTodos(prevTodos => {
       return [...prevTodos, {name, id: uuidv4(), completed: false}]
     })
     // Clear input
     todoNameRef.current.value = ''
   }
+
+  function handleClearCompletedTodos(){
+    const newTodos = todos.filter(todo => !todo.completed)
+    setTodos(newTodos)
+  }
+
   
   return (
     <>
-    <TodoList todos={todos} toogleTodo={toogleTodo} />
-    <input ref={todoNameRef} type="text" placeholder="Enter a new todo" />
-    <button onClick={handleAddTodo}>Add new todo</button>
-    <button onClick={handleClearCompletedTodos}>Remove completed</button>
-    <div>{todos.filter(todo => !todo.completed).length} left to do</div>
+      <Header 
+        handleAddTodo={handleAddTodo} 
+        handleClearCompletedTodos={handleClearCompletedTodos}
+      />
+      <TodoList 
+        todos={todos} 
+        toogleTodo={toogleTodo} 
+      />
+      <Footer 
+        todos={todos} 
+      />
     </>
   )
 }
