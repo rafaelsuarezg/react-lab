@@ -1,4 +1,10 @@
 import React from 'react'
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 export default function Todo({todo, toogleTodo}) {
     
@@ -6,19 +12,34 @@ export default function Todo({todo, toogleTodo}) {
         toogleTodo(todo.id)
     }
 
+      
     return (
-        <div>
-            <div className="container">
-                <div className="row">
-                    <div className="col-12">
-                        <div class="form-check">
-                            <input className="form-check-input" type="checkbox" checked={todo.completed} onChange={handleTodoClick} />
-                            <label className="form-check-label" for="flexCheckDefault">{todo.name}</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+       
+        <Box sx={{ p: 1}}>
+             <Paper elevation={3} sx={{ p: 1}}>
+                <Grid 
+                    container
+                    direction="row"
+                    justifyContent="center"
+                    alignItems="center"
+                >             
+                    <Grid item p={1} xs={12}>
+                            <FormGroup>
+                                <FormControlLabel 
+                                    onChange={handleTodoClick} 
+                                    control={
+                                        <Checkbox
+                                            checked={todo.completed}
+                                        />
+                                    } 
+                                    label={todo.name} 
+                                />
+                            </FormGroup> 
+                    </Grid>
+                </Grid>
+            </Paper>
+        </Box>
+      
     )
 
-}
+}    

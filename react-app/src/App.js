@@ -1,7 +1,7 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState, useEffect} from "react";
+import Container from '@mui/material/Container';
 import TodoList from "./TodoList";
 import Header from "./Header";
-import Footer from "./Footer";
 import {v4 as uuidv4} from 'uuid';
 
 // Working with this tutorial: https://www.youtube.com/watch?v=hQAHSlTtcmY&t=85s&ab_channel=WebDevSimplified
@@ -12,7 +12,6 @@ const LOCAL_STORAGE_KEY = 'todoApp.todos'
 
 function App() {
   const [todos, setTodos] = useState([])
-  const todoNameRef = useRef()
 
   useEffect(() => {
     // Load todos from local storage
@@ -35,18 +34,13 @@ function App() {
     setTodos(newTodos)
   }
   
-  function handleAddTodo (e, todoNameRef) {
-    // get the value of the input
-    const name = todoNameRef.current.value
+  function handleAddTodo (todoText) {
     // return if name is empty
-    if (name === '') return
-    console.log(name)
+    if (todoText === '') return
     // Set Todos
     setTodos(prevTodos => {
-      return [...prevTodos, {name, id: uuidv4(), completed: false}]
+      return [...prevTodos, {name: todoText, id: uuidv4(), completed: false}]
     })
-    // Clear input
-    todoNameRef.current.value = ''
   }
 
   function handleClearCompletedTodos(){
@@ -60,14 +54,11 @@ function App() {
       <Header 
         handleAddTodo={handleAddTodo} 
         handleClearCompletedTodos={handleClearCompletedTodos}
+        todos={todos}
       />
-      <TodoList 
-        todos={todos} 
-        toogleTodo={toogleTodo} 
-      />
-      <Footer 
-        todos={todos} 
-      />
+      <Container maxWidth="sm" sx={{ p: 2}} >
+          <TodoList todos={todos} toogleTodo={toogleTodo} />
+      </Container>
     </>
   )
 }
