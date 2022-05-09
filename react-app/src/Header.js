@@ -11,7 +11,6 @@ export default function Header({todos, handleAddTodo, handleClearCompletedTodos}
     
     const pending = todos.filter(todo => !todo.completed).length
 
-
     return (
     <AppBar position="sticky" color="inherit">
         <Container maxWidth="sm">

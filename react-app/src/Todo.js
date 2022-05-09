@@ -12,34 +12,25 @@ export default function Todo({todo, toogleTodo}) {
         toogleTodo(todo.id)
     }
 
-      
     return (
-       
         <Box sx={{ p: 1}}>
              <Paper elevation={3} sx={{ p: 1}}>
-                <Grid 
-                    container
-                    direction="row"
-                    justifyContent="center"
-                    alignItems="center"
-                >             
+                <Grid  container direction="row" justifyContent="center" alignItems="center">             
                     <Grid item p={1} xs={12}>
-                            <FormGroup>
-                                <FormControlLabel 
-                                    onChange={handleTodoClick} 
-                                    control={
-                                        <Checkbox
-                                            checked={todo.completed}
-                                        />
-                                    } 
-                                    label={todo.name} 
-                                />
-                            </FormGroup> 
+                        <FormGroup>
+                            <FormControlLabel 
+                                onChange={handleTodoClick} 
+                                control={
+                                    <Checkbox
+                                        checked={todo.completed}
+                                    />
+                                } 
+                                label={todo.name} 
+                            />
+                        </FormGroup> 
                     </Grid>
                 </Grid>
             </Paper>
         </Box>
-      
     )
-
 }    

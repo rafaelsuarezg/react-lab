@@ -48,7 +48,6 @@ function App() {
     setTodos(newTodos)
   }
 
-  
   return (
     <>
       <Header 
