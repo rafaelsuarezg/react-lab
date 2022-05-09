@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { Button, Grid, TextField } from "@mui/material";
-
+import AddIcon from '@mui/icons-material/Add';
 export default function AddTodo({handleAddTodo}) {
     
     const [newTodoText, setNewTodoText] = useState("");
@@ -29,7 +29,7 @@ export default function AddTodo({handleAddTodo}) {
                     style ={{ width: "100%"}}
                     onClick={handleClickAddTodo} 
                     variant="contained" 
-
+                    startIcon={<AddIcon />}
                     color="primary"> Add
                 </Button> 
             </Grid>
